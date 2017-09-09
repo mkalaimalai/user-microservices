@@ -17,7 +17,7 @@ http://localhost:8080/swagger-ui.html
 
 ## Steps to create a user
 
--'curl -X POST \
+> 'curl -X POST \
   http://localhost:8080//api/user \
   -H 'accept: application/json' \
   -H 'cache-control: no-cache' \
@@ -40,7 +40,6 @@ http://localhost:8080/swagger-ui.html
       "type": "HOME"
     }
   ]
-}
-'' - run the curl command to create a user
+}'' - run the curl command to create a user
 
 
