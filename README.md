@@ -1,4 +1,4 @@
-# Spring Boot User Micro Service
+# Spring Boot User Micro Services
 
 Simple implementation of Micro Services to manage Users using Spring Boot
 
