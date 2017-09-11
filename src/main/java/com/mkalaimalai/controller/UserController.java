@@ -35,7 +35,7 @@ public class UserController {
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
     public UserVO createUser(@RequestBody @Valid UserVO user) {
-        logger.debug("creating user with email = {}", user.getEmail());
+        logger.debug("creating user with email = {}", user);
         UserVO updatedUserVO =  userService.createUser(user);
         logger.debug("user created with id  {}", updatedUserVO.getId());
         return updatedUserVO;
