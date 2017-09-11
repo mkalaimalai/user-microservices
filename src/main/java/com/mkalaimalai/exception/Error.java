@@ -5,8 +5,12 @@ package com.mkalaimalai.exception;
  */
 public enum Error {
 
-    ER_USER_NOT_FOUNd("User Not Found"),
-    ER_INTERNAL_SERVER_ERROR("Internal Server Error");
+    ERR_USER_NOT_FOUND("User Not Found"),
+    ERR_INTERNAL_SERVER_ERROR("Internal Server Error"),
+    ERR_CONCURRENCY_FAILURE ("Concurrecy Failure"),
+    ERR_ACCESS_DENIED ("Access Denied"),
+    ERR_VALIDATION ("Validation Error"),
+    ERR_METHOD_NOT_SUPPORTED ("Method Not Supported");
 
     protected String message;
 

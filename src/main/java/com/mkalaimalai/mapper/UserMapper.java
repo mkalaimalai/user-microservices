@@ -41,12 +41,14 @@ public class UserMapper {
 
     public UserVO createUserVO(User user) {
         UserVO userVO = userMapper.map(user, UserVO.class);
+        if(user.getAddresses() !=null)
         userVO.setAddresses(createAddressVOList(user.getAddresses()));
         return userVO;
     }
 
     public User createUser(UserVO userVO) {
         User user = userMapper.map(userVO, User.class);
+        if(userVO.getAddresses() !=null)
         user.addAddress(createAddressList(userVO.getAddresses()));
         return user;
     }

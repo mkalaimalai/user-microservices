@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 /**
  * Created by kalaimam on 7/14/17.
@@ -19,17 +20,19 @@ import javax.persistence.Table;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class AddressVO extends BaseVO{
 
     private String line1;
 
     private String line2;
 
+    @NotNull(message = "city can not be null")
     private String city;
 
+    @NotNull(message = "zip can not be null")
     private String zip;
 
+    @NotNull(message = "country can not be null")
     private String country;
 
     private AddressType type;

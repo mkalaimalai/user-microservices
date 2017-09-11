@@ -7,6 +7,7 @@ import org.springframework.dao.ConcurrencyFailureException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.*;
+import org.springframework.validation.FieldError;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -30,6 +31,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<ErrorVO> resourceNotFound(ResourceNotFoundException ex) {
+        logger.error("Global exception {}", ex);
         ErrorVO response = new ErrorVO("Not Found",ex.getMessage());
         return new ResponseEntity<ErrorVO>(response, HttpStatus.NOT_FOUND);
     }
@@ -40,25 +42,25 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
     public ErrorVO processValidationError(MethodArgumentNotValidException ex) {
+        logger.error("Global exception {}", ex);
         BindingResult result = ex.getBindingResult();
-        List<org.springframework.validation.FieldError> fieldErrors = result.getFieldErrors();
+        List<org.springframework.validation.FieldError> fieldErrors =  result.getFieldErrors();
         return processFieldErrors(fieldErrors);
     }
-
-
 
     @ExceptionHandler(AccessDeniedException.class)
     @ResponseStatus(HttpStatus.FORBIDDEN)
     @ResponseBody
-    public ErrorVO processAccessDeniedException(AccessDeniedException e) {
-        return new ErrorVO(ErrorConstants.ERR_ACCESS_DENIED, e.getMessage());
+    public ErrorVO processAccessDeniedException(AccessDeniedException ex) {
+        logger.error("Global exception {}", ex);
+        return new ErrorVO(Error.ERR_ACCESS_DENIED.name(), ex.getMessage());
     }
 
     private ErrorVO processFieldErrors(List<org.springframework.validation.FieldError> fieldErrors) {
-        ErrorVO dto = new ErrorVO("ERR_VALIDATION", "Error Validation");
+        ErrorVO dto = new ErrorVO(Error.ERR_VALIDATION.name(), Error.ERR_VALIDATION.message());
 
         for (org.springframework.validation.FieldError fieldError : fieldErrors) {
-            dto.add(fieldError.getObjectName(), fieldError.getField(), fieldError.getCode());
+            dto.add(fieldError.getObjectName(), fieldError.getField(), fieldError.getDefaultMessage());
         }
 
         return dto;
@@ -68,20 +70,22 @@ public class GlobalExceptionHandler {
     @ResponseBody
     @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
     public ErrorVO processMethodNotSupportedException(HttpRequestMethodNotSupportedException exception) {
-        return new ErrorVO(ErrorConstants.ERR_METHOD_NOT_SUPPORTED, exception.getMessage());
+        logger.error("Global exception {}", exception);
+        return new ErrorVO(Error.ERR_METHOD_NOT_SUPPORTED.name(), exception.getMessage());
     }
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorVO> processRuntimeException(Exception ex) {
         ResponseEntity.BodyBuilder builder;
         ErrorVO errorVM;
+        logger.error("Global exception {}", ex);
         ResponseStatus responseStatus = AnnotationUtils.findAnnotation(ex.getClass(), ResponseStatus.class);
         if (responseStatus != null) {
             builder = ResponseEntity.status(responseStatus.value());
             errorVM = new ErrorVO("error." + responseStatus.value().value(), responseStatus.reason());
         } else {
             builder = ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR);
-            errorVM = new ErrorVO(ErrorConstants.ERR_INTERNAL_SERVER_ERROR, ex.toString());
+            errorVM = new ErrorVO(Error.ERR_INTERNAL_SERVER_ERROR.name(), ex.toString());
         }
         return builder.body(errorVM);
     }

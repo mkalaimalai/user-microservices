@@ -48,6 +48,12 @@ public class User {
     @Column(name = "MIDDLE_NAME")
     private String middleName;
 
+    /* if username is not set, use email as user name*/
+    public void setUserName(String userName){
+        if (userName == null)
+            this.userName = this.email;
+    }
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     @Cascade(org.hibernate.annotations.CascadeType.DELETE)
     private List<Address> addresses;

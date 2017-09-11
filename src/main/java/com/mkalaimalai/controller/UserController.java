@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -33,10 +34,10 @@ public class UserController {
     @RequestMapping(value = "/user", method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
-    public UserVO createUser(@RequestBody UserVO userVO) {
-        logger.debug("creating user = {}", userVO);
-        UserVO updatedUserVO =  userService.createUser(userVO);
-        logger.debug("user create with id  {}", userVO.getId());
+    public UserVO createUser(@RequestBody @Valid UserVO user) {
+        logger.debug("creating user with email = {}", user.getEmail());
+        UserVO updatedUserVO =  userService.createUser(user);
+        logger.debug("user created with id  {}", updatedUserVO.getId());
         return updatedUserVO;
     }
 
@@ -58,9 +59,9 @@ public class UserController {
 
     @RequestMapping(value = "/user/{id}", method = RequestMethod.PUT)
     @ResponseBody
-    public UserVO updateUser(@PathVariable("id") long id, @RequestBody UserVO userVO) {
+    public UserVO updateUser(@PathVariable("id") long id, @RequestBody @Valid UserVO user) {
         logger.info("updating User with id {}", id);
-        UserVO updatedUserVO = userService.updateUser(id, userVO);
+        UserVO updatedUserVO = userService.updateUser(id, user);
         logger.info("updated user with id {}", id);
         return updatedUserVO;
     }
