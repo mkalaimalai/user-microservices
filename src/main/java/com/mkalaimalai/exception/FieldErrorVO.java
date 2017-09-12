@@ -1,9 +1,11 @@
 package com.mkalaimalai.exception;
 
+import com.mkalaimalai.vo.BaseVO;
+
 /**
  * Created by kalaimam on 9/8/17.
  */
-public class FieldError {
+public class FieldErrorVO extends BaseVO{
 
     private static final long serialVersionUID = 1L;
 
@@ -13,7 +15,7 @@ public class FieldError {
 
     private final String message;
 
-    public FieldError(String dto, String field, String message) {
+    public FieldErrorVO(String dto, String field, String message) {
         this.objectName = dto;
         this.field = field;
         this.message = message;

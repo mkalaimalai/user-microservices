@@ -30,10 +30,11 @@ public class GlobalExceptionHandler {
 
 
     @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<ErrorVO> resourceNotFound(ResourceNotFoundException ex) {
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ResponseBody
+    public ErrorVO resourceNotFound(ResourceNotFoundException ex) {
         logger.error("Global exception {}", ex);
-        ErrorVO response = new ErrorVO("Not Found",ex.getMessage());
-        return new ResponseEntity<ErrorVO>(response, HttpStatus.NOT_FOUND);
+        return new ErrorVO(Error.ERR_USER_NOT_FOUND.name(),Error.ERR_USER_NOT_FOUND.message());
     }
 
 
@@ -82,7 +83,7 @@ public class GlobalExceptionHandler {
         ResponseStatus responseStatus = AnnotationUtils.findAnnotation(ex.getClass(), ResponseStatus.class);
         if (responseStatus != null) {
             builder = ResponseEntity.status(responseStatus.value());
-            errorVM = new ErrorVO("error." + responseStatus.value().value(), responseStatus.reason());
+            errorVM = new ErrorVO("error." + responseStatus.value(), responseStatus.reason());
         } else {
             builder = ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR);
             errorVM = new ErrorVO(Error.ERR_INTERNAL_SERVER_ERROR.name(), ex.toString());
