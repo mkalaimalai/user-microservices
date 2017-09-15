@@ -1,4 +1,4 @@
-# Spring Boot User Micro Services
+# Spring Boot User Micro Services using JPA
 
 Simple implementation of Micro Services to manage Users using Spring Boot
 
@@ -7,7 +7,7 @@ Simple implementation of Micro Services to manage Users using Spring Boot
 > `mvn clean install`  - command to build the project
 
 
-## Run the App as Single Actor System
+## Run the App 
 
 > `mvn spring-boot:run` - command to run the app
 
