@@ -10,7 +10,6 @@ import ma.glasnost.orika.impl.ConfigurableMapper;
 import ma.glasnost.orika.impl.DefaultMapperFactory;
 import org.springframework.stereotype.Component;
 
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -49,9 +48,11 @@ public class UserMapper {
     public User createUser(UserVO userVO) {
         User user = userMapper.map(userVO, User.class);
         if(userVO.getAddresses() !=null)
-        user.addAddress(createAddressList(userVO.getAddresses()));
+        user.addAddresses(createAddressList(userVO.getAddresses()));
         return user;
     }
+
+
 
     public List<AddressVO> createAddressVOList(List<Address> addresses) {
         return userMapper.mapAsList(addresses, AddressVO.class);

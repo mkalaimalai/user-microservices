@@ -1,21 +1,19 @@
 package com.mkalaimalai.vo;
 
-import com.fasterxml.jackson.databind.PropertyNamingStrategy;
-import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.mkalaimalai.domain.AddressType;
+import io.swagger.annotations.ApiModel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 /**
  * Created by kalaimam on 7/14/17.
  */
 
+@ApiModel(value="address", description="address object")
 @Data
 @Builder
 @NoArgsConstructor
