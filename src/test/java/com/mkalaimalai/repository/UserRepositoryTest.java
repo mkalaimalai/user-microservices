@@ -38,6 +38,22 @@ public class UserRepositoryTest {
     @Test
     public void whenFindByName_thenReturnUser() {
         // given
+
+        User user = createUser();
+
+        entityManager.persist(user);
+        entityManager.flush();
+
+        // when
+        User userFound = userRepository.findByUserName("Bret");
+
+        // then
+        logger.debug("user found {}",userFound);
+
+        Java6Assertions.assertThat(userFound.getUserName()).isEqualTo(user.getUserName());
+    }
+
+    private User createUser(){
         User user = new User();
         user.setEmail("Sincere@april.biz");
         user.setUserName("Bret");
@@ -50,17 +66,7 @@ public class UserRepositoryTest {
         address.setCountry("US");
         address.setType(AddressType.HOME);
         user.addAddress(address);
-
-        entityManager.persist(user);
-        entityManager.flush();
-
-        // when
-        User userFound = userRepository.findByUserName("Bret");
-
-        // then
-        logger.debug("user found {}",userFound);
-
-        Java6Assertions.assertThat(userFound.getUserName()).isEqualTo(user.getUserName());
+        return user;
     }
 
 }

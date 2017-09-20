@@ -57,6 +57,10 @@ public class UserService {
         return user;
     }
 
+    public User findByUserName(String userName){
+        return userRepository.findByUserName(userName);
+    }
+
     public UserVO updateUser(Long id,  UserVO userVO){
         User user = findById(id);
         if (user == null) {

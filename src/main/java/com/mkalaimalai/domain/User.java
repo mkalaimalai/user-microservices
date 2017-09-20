@@ -49,14 +49,15 @@ public class User {
     @Cascade(org.hibernate.annotations.CascadeType.DELETE)
     private List<Address> addresses = new ArrayList<Address>();
 
+    public void addAddress(Address address){
+       address.setUser(this);
+    }
+
 
     public void addAddresses(List<Address> addresses) {
         addresses.forEach(address -> address.setUser(this));
         this.setAddresses(addresses);
     }
-
-
-
 
     @Override
     public String toString() {

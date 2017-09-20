@@ -18,7 +18,7 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/api")
 @Slf4j
-public class UserController {
+public class UserRestController {
 
     @Autowired
     private UserService userService;
