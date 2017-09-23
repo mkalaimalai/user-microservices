@@ -12,6 +12,9 @@ import static org.mockito.BDDMockito.given;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -62,7 +65,7 @@ public class UserRestControllerTest {
             throws Exception {
         String userName = "Bret";
 
-        given(userService.findAll()).willReturn(createUsers("Bret"));
+        given(userService.findAll(new PageRequest(0, 10))).willReturn(createUsers("Bret"));
 
         mvc.perform(get("/api/user")
                 .contentType(MediaType.APPLICATION_JSON))
@@ -73,7 +76,7 @@ public class UserRestControllerTest {
 
 
 
-    private List<UserVO> createUsers(String userName){
+    private Page<UserVO> createUsers(String userName){
         UserVO user = new UserVO();
         user.setEmail("Sincere@april.biz");
         user.setUserName(userName);
@@ -87,6 +90,6 @@ public class UserRestControllerTest {
         address.setType(AddressType.HOME);
         user.setAddresses(Arrays.asList(address));
 
-        return Arrays.asList(user);
+        return new PageImpl<UserVO>(Arrays.asList(user), new PageRequest(0, 10), 10 );
     }
 }

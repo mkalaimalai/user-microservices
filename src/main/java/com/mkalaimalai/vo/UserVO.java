@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Email;
+import org.springframework.hateoas.ResourceSupport;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -18,12 +19,11 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserVO extends BaseVO{
+public class UserVO extends ResourceSupport{
 
-    private Long id;
+    private Long userId;
 
     private String userName;
-
 
     @NotNull(message = "email not be null")
     @Email

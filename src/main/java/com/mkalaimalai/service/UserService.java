@@ -8,10 +8,14 @@ import com.mkalaimalai.vo.UserVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by kalaimam on 7/14/17.
@@ -42,15 +46,18 @@ public class UserService {
         return userMapper.createUserVO(user);
     }
 
-    public List<UserVO> findAll(){
-        List<User> users = userRepository.findAll();
-        if (users.isEmpty()) {
+    public Page<UserVO> findAll(Pageable pageable){
+        Page<User> users = userRepository.findAll(pageable);
+
+        if (users.getContent().isEmpty()) {
             throw new ResourceNotFoundException("users not found");
         }
-        List<UserVO> userVOs = new ArrayList<UserVO>();
-        users.forEach( user -> userVOs.add(userMapper.createUserVO(user)));
-        return userVOs;
+        int totalElements = (int) users.getTotalElements();
+        return new PageImpl<UserVO>(users.getContent().stream()
+                                .map(user -> userMapper.createUserVO(user))
+                                .collect(Collectors.toList()), pageable, totalElements);
     }
+
 
     public User findById(Long id){
         User user = userRepository.findById(id);
@@ -68,7 +75,7 @@ public class UserService {
             throw new ResourceNotFoundException(id, "user not found");
         }
         User updatedUser = userMapper.createUser(userVO);
-        user.setId(id);
+        updatedUser.setId(id);
         User savedUser = userRepository.save(updatedUser);
         return userMapper.createUserVO(savedUser);
     }

@@ -27,6 +27,7 @@ public class UserMapper {
         userMapperFactory = new DefaultMapperFactory.Builder().build();
         userMapperFactory.classMap(User.class, UserVO.class)
                 .mapNulls(true).mapNullsInReverse(true)
+                .field("id", "userId")
                 .byDefault()
                 .register();
         userMapperFactory.classMap(Address.class, AddressVO.class)
