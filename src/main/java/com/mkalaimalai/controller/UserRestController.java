@@ -98,4 +98,9 @@ public class UserRestController {
         log.info("deleted all users");
     }
 
+    @RequestMapping(value = "/cache", method = RequestMethod.DELETE)
+    @CacheEvict(value = "users", allEntries = true)
+    public void clearCache() {
+    }
+
 }
