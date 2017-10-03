@@ -70,8 +70,8 @@ public class UserRestControllerTest {
         mvc.perform(get("/api/user")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(1)))
-                .andExpect(jsonPath("$[0].user_name", is(userName)));
+                .andExpect(jsonPath("$.content", hasSize(1)))
+                .andExpect(jsonPath("$.content.[0].user_name", is(userName)));
     }
 
 
