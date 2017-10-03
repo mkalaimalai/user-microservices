@@ -5,6 +5,11 @@
 spring.jmx:
    enabled: false
 
+spring.boot:
+      admin:
+        url: http://localhost:8085
+
+
 spring.datasource:
     driverClassName: org.h2.Driver
     url: jdbc:h2:mem:userboot;MODE=MySQL
@@ -31,12 +36,13 @@ project:
   name: spring-boot-user-microservices-jpa
   version: 0.1
   description: spring-boot-user-microservices-jpa
+
 info:
   build:
-    artifact: ${project.artifactId}
-    name: ${project.name}
-    description: ${project.description}
-    version: ${project.version}
+    artifact: @project.artifactId@
+    name: @project.name@
+    description: @project.description@
+    version: @project.version@
 
 hotel.service:
   name: 'default profile:'
@@ -44,7 +50,6 @@ hotel.service:
 spring.cache:
       ehcache:
         config: classpath:ehcache.xml
-
 
 spring:
   jpa:
