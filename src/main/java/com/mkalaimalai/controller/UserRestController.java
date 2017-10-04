@@ -68,7 +68,7 @@ public class UserRestController {
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @ResponseStatus(HttpStatus.OK)
     @CacheEvict(value="users", allEntries = true)
-    public void deleteUser(@PathVariable("id") long id) {
+    public void deleteUser(@PathVariable("id") Long id) {
         log.info("fetching & deleting User with id {}", id);
         userService.deleteUser(id);
         log.info("deleted user with id {}", id);

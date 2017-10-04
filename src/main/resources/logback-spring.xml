@@ -7,11 +7,17 @@
     <!--value="%d{yyyy-MM-dd HH:mm:ss.SSS} [${spring.application.name}] [trace=%X{X-Trace-Id:-},span=%X{X-Span-Id:-}] [%15.15t] %-40.40logger{39}: %m%n"/>-->
     <include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
 
+    <property name="LOG_FILE" value="user-services-jpa.log"/>
+    <property name="FILE_LOG_PATTERN"
+              value="%blue(%d{dd MMM yyyy HH:mm:ss,SSS})  %cyan(%X{id}) %highlight(%-5p) %cyan(%c:%L) - %m%n"/>
+    <include resource="org/springframework/boot/logging/logback/file-appender.xml" />
+
     <logger name="com.mkalaimalai" level="DEBUG"/>
     <logger name="org.springframework.cache" level="ERROR"/>
     <logger name="de.codecentric.boot" level="ERROR"/>
 
     <root level="ERROR">
         <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE"/>
     </root>
 </configuration>

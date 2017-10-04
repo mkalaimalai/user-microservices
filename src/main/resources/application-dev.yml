@@ -13,8 +13,8 @@ spring.boot:
 
 
 spring.datasource:
-    driverClassName: org.h2.Driver
-    url: jdbc:h2:mem:userboot;MODE=MySQL;DB_CLOSE_ON_EXIT=FALSE
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/test?useSSL=false
 
 server:
   port: 8080
@@ -56,6 +56,8 @@ spring.cache:
 spring:
   jpa:
     show-sql: true
+    hibernate.ddl-auto: create-drop
+    properties.hibernate.dialect: org.hibernate.dialect.MySQL5Dialect
 ---
 spring:
   profiles: test
@@ -63,12 +65,10 @@ spring:
     console:
       enabled: true
 
-spring.jpa:
-    hibernate.ddl-auto: create-drop
-
 user.service:
   name: 'test profile:'
 
 logging:
   file: user_microservices.log
   org.hibernate: INFO
+
