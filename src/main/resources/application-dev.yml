@@ -55,7 +55,7 @@ spring.cache:
 
 spring:
   jpa:
-    show-sql: true
+    show-sql: false
     hibernate.ddl-auto: create-drop
     properties.hibernate.dialect: org.hibernate.dialect.MySQL5Dialect
 ---

@@ -53,7 +53,15 @@
             <optional>true</optional>
         </dependency>
 
-       <dependency>
+        <!-- https://mvnrepository.com/artifact/com.timgroup/java-statsd-client -->
+        <dependency>
+            <groupId>com.timgroup</groupId>
+            <artifactId>java-statsd-client</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+
+
+        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.16.18</version>
