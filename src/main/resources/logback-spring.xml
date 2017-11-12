@@ -16,8 +16,20 @@
     <logger name="org.springframework.cache" level="ERROR"/>
     <logger name="de.codecentric.boot" level="ERROR"/>
 
+    <appender name="ASYNCFILE" class="ch.qos.logback.classic.AsyncAppender">
+        <queueSize>500</queueSize>
+        <discardingThreshold>0</discardingThreshold>
+        <appender-ref ref="FILE" />
+    </appender>
+
+    <appender name="ASYNCCONSOLE" class="ch.qos.logback.classic.AsyncAppender">
+        <queueSize>500</queueSize>
+        <discardingThreshold>0</discardingThreshold>
+        <appender-ref ref="CONSOLE" />
+    </appender>
+
     <root level="ERROR">
-        <appender-ref ref="CONSOLE"/>
-        <appender-ref ref="FILE"/>
+        <appender-ref ref="ASYNCCONSOLE"/>
+        <appender-ref ref="ASYNCFILE"/>
     </root>
 </configuration>

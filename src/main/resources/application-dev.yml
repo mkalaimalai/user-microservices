@@ -7,7 +7,7 @@ spring.jmx:
 
 spring.boot:
       admin:
-        url: http://localhost:8085
+        url: http://localhost:8009
         client:
           name: user-services
 
