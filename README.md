@@ -17,6 +17,8 @@ http://localhost:8080/swagger-ui.html
 
 ## Steps to create a user
 
-```yml curl -X POST  http://localhost:8080//api/user  -H 'accept: application/json'  -H 'cache-control: no-cache'  -H 'content-type: application/json'  -H 'postman-token: e07adf15-dabb-3384-0092-4dc926974b34'  -d '{ "user_name": "Bret", "email" : "Sincere@april.biz", "password": "welcome@123", "first_name": "Leanne", "last_name": "Graham", "middle_name": "N", "addresses": [ { "line1": "Kulas Light", "line2": "Apt. 556", "city": "Gwenborough", "zip": "92998-3874", "country": "US", "type": "HOME" } ] }'  ```
+```yml
+curl -X POST  http://localhost:8080//api/user  -H 'accept: application/json'  -H 'cache-control: no-cache'  -H 'content-type: application/json'  -H 'postman-token: e07adf15-dabb-3384-0092-4dc926974b34'  -d '{ "user_name": "Bret", "email" : "Sincere@april.biz", "password": "welcome@123", "first_name": "Leanne", "last_name": "Graham", "middle_name": "N", "addresses": [ { "line1": "Kulas Light", "line2": "Apt. 556", "city": "Gwenborough", "zip": "92998-3874", "country": "US", "type": "HOME" } ] }'  
+```
 
 
