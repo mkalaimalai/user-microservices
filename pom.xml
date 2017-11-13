@@ -109,7 +109,9 @@
         </dependency>
     </dependencies>
 
+
     <build>
+        <finalName>user-microservices-jpa</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

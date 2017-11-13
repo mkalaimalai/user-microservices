@@ -13,6 +13,7 @@
     <include resource="org/springframework/boot/logging/logback/file-appender.xml" />
 
     <logger name="com.mkalaimalai" level="DEBUG"/>
+    <logger name="com.mysql" level="DEBUG"/>
     <logger name="org.springframework.cache" level="ERROR"/>
     <logger name="de.codecentric.boot" level="ERROR"/>
 
